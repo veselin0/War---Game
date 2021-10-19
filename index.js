@@ -1,12 +1,3 @@
-/**
- Challenge: Add a button that, when clicked, gets a new 
- deck of cards from the deckofcards API
- 
- URL: https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/
- 
- Log the whole response to the console
-*/
-
 let deckId;
 
 // create button
@@ -29,37 +20,8 @@ const clickHandler = () => {
 // add eventlistener to the button
 btn.addEventListener('click', clickHandler);
      
-/**
- * Challenge
- * 
- * Background:
- * The Deck of Cards API expects us to provide the deck id 
- * of the deck we're playing with so it can remember which
- * cards we've already drawn, how many are remaining in the
- * deck, etc.
- * 
- * Task: save the deck_id from the returned data to a local?
- * (global) variable so we can use it later
-*/
-
-/**
- * Challenge
- * 
- * Task: Using the saved deckId, draw 2 new cards from the deck
- * 
- * Docs for original Deck of Cards API: https://deckofcardsapi.com/#draw-card
- * BaseUrl you'll use: https://apis.scrimba.com/deckofcards/api/deck/
- * (that will replace the base url of https://deckofcardsapi.com/api/deck/)
- * that you'll see in the deck of cards API docs.
- * 
- * 1. Create a new button that, when clicked, draws 2 cards from the deckId
- * you have saved
- *      Note: you'll need to get a new deck every time you refresh the page,
- *      since you're only saving your deckId in a local variable right now
- * 2. Log those 2 cards to the console
-*/
-
 const drawCards = () => {
+    // create another button
     const br = document.createElement('br');
     document.body.appendChild(br);
     const btn1 = document.createElement('button');
@@ -72,37 +34,42 @@ const drawCards = () => {
         fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`) 
             .then(response => response.json())
             .then(data => {
-                if (deckId) console.log(data);
+                console.log(data); 
+                // create new div after the second button
+                const div = document.createElement('div');
+                div.className = 'img-container';
+                //create card images
+                div.innerHTML = `
+                    <img src=${data.cards[0].image} alt='card0' width='200' height='300'><br>
+                    <img src=${data.cards[1].image} alt='card1' width='200' height='300'>
+                `;
+                document.body.appendChild(div); 
             });
     };
 
     // add anothe eventlistener to the button 1
     btn1.addEventListener('click', clickHandler1);
 };
-// create another button
-// const createBtn = () => {
-//     const br = document.createElement('br');
-//     document.body.appendChild(br);
-//     const btn1 = document.createElement('button');
-//     btn1.className = 'draw-two-cards';
-//     btn1.innerText = 'Draw Two Cards, Please!';
-//     document.body.appendChild(btn1);
+
+/**
+ * Challenge:
+ * 
+ * Display the images of the 2 cards you drew in the browser.
+ * Probably best to use `innerHTML` to insert a couple <img> elements
+ * on the page.
+*/
+
+// const dispalyCards = () => {
+//     // create new div after the second button
+//     const div = document.createElement('div');
+//     div.className = 'img-container';
+//     //create card images
+//     div.innerHTML = `
+//         <img src='${src0}' alt='card0' width='100' height='200'><br>
+//         <img src='${src1}' alt='card1' width='100' height='200'>
+//     `;
+//     document.body.appendChild(div);
 // }
-// const br = document.createElement('br');
-// document.body.appendChild(br);
-// const btn1 = document.createElement('button');
-// btn1.className = 'draw-two-cards';
-// btn1.innerText = 'Draw Two Cards, Please!';
-// document.body.appendChild(btn1);
 
-// // create another click-handler function
-// const clickHandler1 = () => {
-//     fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`) 
-//         .then(response => response.json())
-//         .then(data => {
-//             if (deckId) console.log(data);
-//         });
-// };
-
-// // add another eventlistener to the button 1
-// btn1.addEventListener('click', clickHandler1);
+//${cards[0].image}
+//${cards[1].image}
