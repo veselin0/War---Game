@@ -1,0 +1,64 @@
+/**
+ * Challenge:
+ * 
+ * Start making this look lots nicer :)
+ * 
+ * 1. Add a card table background with the img/table.png image provided.
+ * 2. Move the draw button to the very bottom of the page, full width
+ * 3. Add some button styles. You can use the photo on the slides
+ * for one option.
+*/
+
+/*html, body {
+    background-color: green;
+    margin: 0;
+    padding: 0;
+    height: 100hv;
+}*/
+
+body {
+    background-color: green;
+    height: 100hv;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.new-deck {
+    background-color: orange;
+    cursor: pointer;
+    width: 60%;
+    height: 100px;
+    margin-left: 20%;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    text-align: center;
+    font-size: 30px;
+
+}
+
+.draw-two-cards {
+    background-color: orange;
+    cursor: pointer;
+    width: 60%;
+    height: 100px;
+    margin-left: 20%;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    text-align: center;
+    font-size: 30px;
+}
+
+.img0 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img1 {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

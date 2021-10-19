@@ -40,8 +40,8 @@ const drawCards = () => {
                 div.className = 'img-container';
                 //create card images
                 div.innerHTML = `
-                    <img src=${data.cards[0].image} alt='card0' width='200' height='300'><br>
-                    <img src=${data.cards[1].image} alt='card1' width='200' height='300'>
+                    <img class='img0' src=${data.cards[0].image} alt='card0' width='200' height='300'><br>
+                    <img class='img1' src=${data.cards[1].image} alt='card1' width='200' height='300'>
                 `;
                 document.body.appendChild(div); 
             });
