@@ -5,8 +5,12 @@ const btn = document.createElement('button');
 btn.className = 'new-deck';
 btn.innerText = 'New Deck, Please!';
 document.body.appendChild(btn);
+// create an h3 to display cards remaining
+const cardsRemaining = document.createElement('h3');
+cardsRemaining.innerText = 'Cards Remaining:';
+document.body.appendChild(cardsRemaining);
 // create an h2 to display the winner
-const winner = document.createElement('h2');
+const winner = document.createElement('h2');  
 winner.innerText = 'Game of War';
 document.body.appendChild(winner);
 // create new div before the second button
@@ -67,7 +71,7 @@ const clickHandler1 = () => {
             } else {
                 winner.innerText = 'War!';
             }
-            
+            cardsRemaining.innerText = `Cards Remaining: ${(data.remaining)}`;
 
         });
 };
