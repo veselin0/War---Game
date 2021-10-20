@@ -5,6 +5,10 @@ const btn = document.createElement('button');
 btn.className = 'new-deck';
 btn.innerText = 'New Deck, Please!';
 document.body.appendChild(btn);
+// create an h2 to display the winner
+const winner = document.createElement('h2');
+winner.innerText = 'Game of War';
+document.body.appendChild(winner);
 // create new div before the second button
 const cardsContainer = document.createElement('div');
 cardsContainer.className = 'cards-container';
@@ -57,13 +61,13 @@ const clickHandler1 = () => {
             let card0 = score.indexOf(data.cards[0].value);
             let card1 = score.indexOf(data.cards[1].value);
             if (card0 > card1) {
-                console.log('card0');
+                winner.innerText = 'Computer wins!';
             } else if (card1 > card0) {
-                console.log('card1');
+                winner.innerText = 'You win!';
             } else {
-                console.log("It's a tie!");
+                winner.innerText = 'War!';
             }
-
+            
 
         });
 };
