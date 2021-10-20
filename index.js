@@ -7,7 +7,7 @@ btn.innerText = 'New Deck, Please!';
 document.body.appendChild(btn);
 // create an h3 to display cards remaining
 const cardsRemaining = document.createElement('h3');
-cardsRemaining.innerText = 'Cards Remaining:';
+cardsRemaining.innerText = 'Cards Remaining: 52';
 document.body.appendChild(cardsRemaining);
 // create an h2 to display the winner
 const winner = document.createElement('h2');  
@@ -36,8 +36,10 @@ const clickHandler = () => {
     fetch('https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/')
         .then(response => response.json())
         .then(data => {
+            cardsRemaining.innerText = `Cards Remaining: ${(data.remaining)}`;
             deckId = data.deck_id;
-            if (deckId) document.body.appendChild(btn1); //drawCards();
+            if (deckId) document.body.appendChild(btn1); 
+            
         });
 };
 
@@ -72,7 +74,14 @@ const clickHandler1 = () => {
                 winner.innerText = 'War!';
             }
             cardsRemaining.innerText = `Cards Remaining: ${(data.remaining)}`;
-
+            if (data.remaining) {
+                btn.disabled = true;
+            } else {
+                btn.disabled = false;
+                btn1.remove();
+                cardSlot0.innerHTML = '';
+                cardSlot1.innerHTML = '';
+            }
         });
 };
 

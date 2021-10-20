@@ -25,6 +25,10 @@ button.new-deck {
     padding: 5px;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
+
 button.draw-two-cards {
     font-size: 30px;
     padding: 5px;
