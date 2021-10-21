@@ -7,7 +7,7 @@ btn.innerText = 'New Deck, Please!';
 document.body.appendChild(btn);
 // create an h3 to display cards remaining
 const cardsRemaining = document.createElement('h3');
-cardsRemaining.innerText = 'Cards Remaining: 52';
+cardsRemaining.innerText = 'Cards Remaining: ';
 document.body.appendChild(cardsRemaining);
 // create an h2 to display the winner
 const winner = document.createElement('h2');  
@@ -47,9 +47,13 @@ const clickHandler = () => {
         .then(response => response.json())
         .then(data => {
             cardsRemaining.innerText = `Cards Remaining: ${(data.remaining)}`;
+            winner.innerText = 'Game of War';
             deckId = data.deck_id;
-            if (deckId) document.body.appendChild(btn1); 
-            
+            if (deckId) {
+                document.body.appendChild(btn1);
+            }  
+            computerCountDisplay.innerText = `Computer Count: ${computerCount}`;
+            yourCountDisplay.innerText = `Your Count: ${yourCount}`;
         });
 };
 
@@ -95,9 +99,19 @@ const clickHandler1 = () => {
                 btn1.remove();
                 cardSlot0.innerHTML = '';
                 cardSlot1.innerHTML = '';
+                if (computerCount > yourCount) {
+                    winner.innerText = 'Game over! Computer wins!';
+                } else if (yourCount > computerCount) {
+                    winner.innerText = 'Game over! You win!';
+                } else {
+                    winner.innerText = "Game over! It's a Tie!"; 
+                }
+                computerCount = 0;
+                yourCount = 0;  
             }
+            
         });
 };
 
-// add anothe eventlistener to the button 1
+// add another eventlistener to the button 1
 btn1.addEventListener('click', clickHandler1);
