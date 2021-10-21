@@ -13,6 +13,11 @@ document.body.appendChild(cardsRemaining);
 const winner = document.createElement('h2');  
 winner.innerText = 'Game of War';
 document.body.appendChild(winner);
+// create an he to display computer count
+let computerCount = 0;
+const computerCountDisplay = document.createElement('h3');
+computerCountDisplay.innerText = `Computer Count: ${computerCount}`;
+document.body.appendChild(computerCountDisplay);
 // create new div before the second button
 const cardsContainer = document.createElement('div');
 cardsContainer.className = 'cards-container';
@@ -24,6 +29,11 @@ cardsContainer.appendChild(cardSlot0);
 const cardSlot1 = document.createElement('div');
 cardSlot1.className = 'card-slot';
 cardsContainer.appendChild(cardSlot1);
+// create an he to display your count
+let yourCount = 0;
+const yourCountDisplay = document.createElement('h3');
+yourCountDisplay.innerText = `Your Count: ${yourCount}`;
+document.body.appendChild(yourCountDisplay);
 // create another button
 const br = document.createElement('br');
 document.body.appendChild(br);
@@ -68,8 +78,12 @@ const clickHandler1 = () => {
             let card1 = score.indexOf(data.cards[1].value);
             if (card0 > card1) {
                 winner.innerText = 'Computer wins!';
+                computerCount++;
+                computerCountDisplay.innerText = `Computer Count: ${computerCount}`;
             } else if (card1 > card0) {
                 winner.innerText = 'You win!';
+                yourCount++;
+                yourCountDisplay.innerText = `Your Count: ${yourCount}`;
             } else {
                 winner.innerText = 'War!';
             }
