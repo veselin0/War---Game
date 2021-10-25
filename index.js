@@ -10,7 +10,7 @@ const cardsRemaining = document.createElement('h3');
 cardsRemaining.innerText = 'Cards Remaining: ';
 document.body.appendChild(cardsRemaining);
 // create an h2 to display the winner
-const winner = document.createElement('h2');  
+const winner = document.createElement('h2');
 winner.innerText = 'Game of War';
 document.body.appendChild(winner);
 // create an he to display computer count
@@ -42,75 +42,74 @@ btn1.className = 'draw-two-cards';
 btn1.innerText = 'Draw Two Cards, Please!';
 
 // create clickHandler function
-const clickHandler = () => {
-    fetch('https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/')
-        .then(response => response.json())
-        .then(data => {
-            cardsRemaining.innerText = `Cards Remaining: ${(data.remaining)}`;
-            winner.innerText = 'Game of War';
-            deckId = data.deck_id;
-            if (deckId) {
-                document.body.appendChild(btn1);
-            }  
-            computerCountDisplay.innerText = `Computer Count: ${computerCount}`;
-            yourCountDisplay.innerText = `Your Count: ${yourCount}`;
-        });
+const clickHandler = async () => {
+    const response = await fetch('https://apis.scrimba.com/deckofcards/api/deck/new/shuffle/');
+    const data = await response.json();
+    cardsRemaining.innerText = `Cards Remaining: ${(data.remaining)}`;
+    winner.innerText = 'Game of War';
+    deckId = data.deck_id;
+    if (deckId) {
+        document.body.appendChild(btn1);
+    }
+    computerCountDisplay.innerText = `Computer Count: ${computerCount}`;
+    yourCountDisplay.innerText = `Your Count: ${yourCount}`;
+
 };
 
 // add eventlistener to the button
 btn.addEventListener('click', clickHandler);
 
 // create another click-handler function
-const clickHandler1 = () => {
-    fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`)
-        .then(response => response.json())
-        .then(data => {
+const clickHandler1 = async () => {
+    const response = await fetch(`https://apis.scrimba.com/deckofcards/api/deck/${deckId}/draw/?count=2`);
+    const data = await response.json();
 
-            cardSlot0.innerHTML = `
+    cardSlot0.innerHTML = `
                 
                     <img class='card' src=${data.cards[0].image} alt='card0'>
             `;
-            cardSlot1.innerHTML = `
+    cardSlot1.innerHTML = `
                 
                     <img class='card' src=${data.cards[1].image} alt='card1'>
                 
             `;
-            // determine which of the 2 cards is the "winner" (has higher value)
-            const score = ["2", "3", "4", "5", "6", "7", "8", "9", 
-            "10", "JACK", "QUEEN", "KING", "ACE"];
-            let card0 = score.indexOf(data.cards[0].value);
-            let card1 = score.indexOf(data.cards[1].value);
-            if (card0 > card1) {
-                winner.innerText = 'Computer wins!';
-                computerCount++;
-                computerCountDisplay.innerText = `Computer Count: ${computerCount}`;
-            } else if (card1 > card0) {
-                winner.innerText = 'You win!';
-                yourCount++;
-                yourCountDisplay.innerText = `Your Count: ${yourCount}`;
-            } else {
-                winner.innerText = 'War!';
-            }
-            cardsRemaining.innerText = `Cards Remaining: ${(data.remaining)}`;
-            if (data.remaining) {
-                btn.disabled = true;
-            } else {
-                btn.disabled = false;
-                btn1.remove();
-                cardSlot0.innerHTML = '';
-                cardSlot1.innerHTML = '';
-                if (computerCount > yourCount) {
-                    winner.innerText = 'Game over! Computer wins!';
-                } else if (yourCount > computerCount) {
-                    winner.innerText = 'Game over! You win!';
-                } else {
-                    winner.innerText = "Game over! It's a Tie!"; 
-                }
-                computerCount = 0;
-                yourCount = 0;  
-            }
-            
-        });
+    // determine which of the 2 cards is the "winner" (has higher value)
+    const score = ["2", "3", "4", "5", "6", "7", "8", "9",
+        "10", "JACK", "QUEEN", "KING", "ACE"
+    ];
+    let card0 = score.indexOf(data.cards[0].value);
+    let card1 = score.indexOf(data.cards[1].value);
+    if (card0 > card1) {
+        winner.innerText = 'Computer wins!';
+        computerCount++;
+        computerCountDisplay.innerText = `Computer Count: ${computerCount}`;
+    } else if (card1 > card0) {
+        winner.innerText = 'You win!';
+        yourCount++;
+        yourCountDisplay.innerText = `Your Count: ${yourCount}`;
+    } else {
+        winner.innerText = 'War!';
+    }
+    cardsRemaining.innerText = `Cards Remaining: ${(data.remaining)}`;
+    if (data.remaining) {
+        btn.disabled = true;
+    } else {
+        btn.disabled = false;
+        btn1.remove();
+        cardSlot0.innerHTML = '';
+        cardSlot1.innerHTML = '';
+        if (computerCount > yourCount) {
+            winner.innerText = 'Game over! Computer wins!';
+        } else if (yourCount > computerCount) {
+            winner.innerText = 'Game over! You win!';
+        } else {
+            winner.innerText = "Game over! It's a Tie!";
+        }
+        computerCount = 0;
+        yourCount = 0;
+    }
+
+
 };
 
 // add another eventlistener to the button 1
